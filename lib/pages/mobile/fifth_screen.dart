@@ -1,16 +1,39 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../widgets/custom_font.dart';
 
-class FifthScreen extends StatelessWidget {
+class FifthScreen extends StatefulWidget {
   const FifthScreen({super.key});
 
+  @override
+  State<FifthScreen> createState() => _FifthScreenState();
+}
+
+class _FifthScreenState extends State<FifthScreen> {
+      bool _animationCompleted = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _startAnimation();
+    });
+  }
+
+  void _startAnimation() {
+    setState(() {
+      _animationCompleted = true;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
       Padding(
         padding:
-            const EdgeInsets.only(left: 20, right: 20, bottom: 60, top: 60),
+            EdgeInsets.only(left: 20.sp, right: 20.sp, bottom: 60.h, top: 60.h),
         child: Column(
           children: [
             Row(
@@ -18,285 +41,230 @@ class FifthScreen extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/images/star pu.png',
-                  width: 20,
-                  height: 20,
+                  width: 20.sp,
+                  height: 20.sp,
                 ),
-                const SizedBox(
-                  height: 30,
-                )
+                SizedBox(
+                  height: 30.sp,
+                ).animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
               ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text('Frequently Ask',
-                    style: TextStyle(
-                        fontFamily: 'ClashDisplay',
-                        fontSize: 26,
-                        color: Colors.white)),
-                const Text('Question',
-                    style: TextStyle(
-                        fontFamily: 'ClashDisplay',
-                        fontSize: 22,
-                        color: Color(0xFFD434FE))),
-                const SizedBox(
-                  height: 20,
+                AnimatedTextKit(
+                  isRepeatingAnimation: false,
+                    animatedTexts: [
+                      TyperAnimatedText(
+                        'Frequently Ask',
+                        textStyle: TextStyle(
+                          fontFamily: 'ClashDisplay',
+                          color: Colors.white,
+                          fontSize: 26.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                  AnimatedTextKit(
+                    totalRepeatCount: 2,
+                    animatedTexts: [
+                      TyperAnimatedText(
+                        'Question',
+                        textStyle: TextStyle(
+                          fontFamily: 'ClashDisplay',
+                          color:  const Color(0xFFD434FE),
+                          fontSize: 22.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                SizedBox(
+                  height: 20.sp,
                 ),
                 RichText(
                   text: TextSpan(
                     style: DefaultTextStyle.of(context).style,
                     children: <TextSpan>[
                       TextSpan(
-                          text:
-                              'We got answers to the questions that you might\nwant to ask about',
-                          style: GoogleFonts.montserrat(
-                              color: Colors.white, fontSize: 12)),
+                        text:
+                            'We got answers to the questions that you might want to ask about',
+                        style: GoogleFonts.montserrat(
+                            color: Colors.white, fontSize: 12.sp)
+                      ),
                       TextSpan(
                         text: ' getlinked Hackathon 1.0',
                         style: GoogleFonts.montserrat(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(
-                  height: 60,
+                ).animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
+                SizedBox(
+                  height: 60.sp,
                 ),
                 SizedBox(
-                  width: 500,
-                  child: Column(
+                  width: 500.sp,
+                  child: const Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Can I work on a project I started before the\nhackathon?',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            style: CustomFont.customFontWhite(12.0),
-                          ),
-                          const Text(
-                            '+',
-                            style: TextStyle(
-                                color: Color(0xFFD434FE), fontSize: 16),
-                          )
-                        ],
+                      _Questions(
+                        title:
+                            'Can I work on a project I started before the hackathon?',
+                      ),                     
+                      _Questions(
+                        title:
+                            'What happens if I need help during the hackathon?',
                       ),
-                      const SizedBox(
-                        height: 10,
+                      _Questions(
+                        title:
+                            'What happens if I don\'t have an idea for a project?',
                       ),
-                      const Divider(
-                        color: Color(0xFFD434FE),
-                        height: 1,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'What happens if I need help during the\nhackathon?',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            style: CustomFont.customFontWhite(12.0),
-                          ),
-                          const Text(
-                            '+',
-                            style: TextStyle(
-                                color: Color(0xFFD434FE), fontSize: 16),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Divider(
-                        color: Color(0xFFD434FE),
-                        height: 1,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'What happens if I don\'t have an idea for\na project?',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            style: CustomFont.customFontWhite(12.0),
-                          ),
-                          const Text(
-                            '+',
-                            style: TextStyle(
-                                color: Color(0xFFD434FE), fontSize: 16),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Divider(
-                        color: Color(0xFFD434FE),
-                        height: 1,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
+                       _Questions(
+                        title:
                             'Can I join a team or do I have to come\nwith one?',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            style: CustomFont.customFontWhite(12.0),
-                          ),
-                          const Text(
-                            '+',
-                            style: TextStyle(
-                                color: Color(0xFFD434FE), fontSize: 16),
-                          )
-                        ],
                       ),
-                      const SizedBox(
-                        height: 10,
+                      _Questions(
+                        title:
+                            'What happens after the hackathon ends',
                       ),
-                      const Divider(
-                        color: Color(0xFFD434FE),
-                        height: 1,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'What happens after the hackathon\nends',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            style: CustomFont.customFontWhite(12.0),
-                          ),
-                          const Text(
-                            '+',
-                            style: TextStyle(
-                                color: Color(0xFFD434FE), fontSize: 16),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Divider(
-                        color: Color(0xFFD434FE),
-                        height: 1,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Can I work on a project I started before the\nhackathon?',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            style: CustomFont.customFontWhite(12.0),
-                          ),
-                          const Text(
-                            '+',
-                            style: TextStyle(
-                                color: Color(0xFFD434FE), fontSize: 16),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Divider(
-                        color: Color(0xFFD434FE),
-                        height: 1,
-                      ),
-                      const SizedBox(
-                        height: 20,
+                      _Questions(
+                        title:
+                            'Can I work on a project I started before the hackathon?',
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 60,
+                SizedBox(
+                  height: 60.sp,
                 ),
               ],
             ),
-            Image.asset('assets/images/casual.png')
+            Image.asset('assets/images/casual.png').animate().fade(duration: 2.seconds).scale(delay: 1.seconds),
           ],
         ),
       ),
-      Positioned(
-        top: 1150,
-        right: 50,
+      AnimatedPositioned(
+          duration: const Duration(seconds: 4),
+        top: _animationCompleted ? 1050.sp : 1000.sp,
+        right: _animationCompleted ? 50.sp : 0.sp,
         child: Image.asset(
           'assets/images/star.png',
-          width: 20,
-          height: 20,
+          width: 20.sp,
+          height: 20.sp,
         ),
       ),
-      Positioned(
-        top: 730,
-        right: 250,
+      AnimatedPositioned(
+          duration: const Duration(seconds: 4),
+        top: _animationCompleted ? 730.sp : 400.sp,
+        right: _animationCompleted ? 250.sp : 50.sp,
         child: Image.asset(
           'assets/images/sata gra.png',
-          width: 10,
-          height: 10,
+          width: 10.sp,
+          height: 10.sp,
         ),
       ),
-      Positioned(
-        top: 710,
-        left: 180,
+      AnimatedPositioned(
+          duration: const Duration(seconds: 4),
+        top: _animationCompleted ? 610.sp : 200.sp,
+        left: _animationCompleted ? 180.sp : 140.sp,
         child: Image.asset(
           'assets/images/que.png',
-          width: 50,height: 50,
+          width: 50.sp,
+          height: 50.sp,
         ),
       ),
-      Positioned(
-        top: 750,
-        left: 100,
+      AnimatedPositioned(
+          duration: const Duration(seconds: 4),
+        top: 660.sp,
+        left: _animationCompleted ? 100.sp : 80.sp,
         child: Image.asset(
           'assets/images/que1.png',
-          width: 50,height: 50,
+          width: 50.sp,
+          height: 50.sp,
         ),
       ),
-      Positioned(
-        top: 750,
-        left: 250,
+      AnimatedPositioned(
+          duration: const Duration(seconds: 4),
+        top: 660.sp,
+        right: 60.sp,
         child: Image.asset(
           'assets/images/que1.png',
-          width: 50,height: 50,
+          width: 50.sp,
+          height: 50.sp,
         ),
       ),
-      Positioned(
-        top: 850,
-        left: 150,
+      AnimatedPositioned(
+          duration: const Duration(seconds: 4),
+        top: _animationCompleted ? 850.sp : 0.sp,
+        left: _animationCompleted ? 80.sp : 0.sp,
         child: Image.asset(
           'assets/images/sata gra.png',
-          width: 8,
-          height: 8,
+          width: 8.sp,
+          height: 8.sp,
         ),
       ),
-      Positioned(
-        top: 920,
-        left: 100,
+      AnimatedPositioned(
+          duration: const Duration(seconds: 4),
+        top: _animationCompleted ? 1060.sp : 700.sp,
+        left: _animationCompleted ? 100.sp : 50.sp,
         child: Image.asset(
           'assets/images/star2.png',
-          width: 15,
-          height: 15,
+          width: 15.sp,
+          height: 15.sp,
         ),
       ),
     ]);
-  
+  }
+}
+
+class _Questions extends StatelessWidget {
+  final String title;
+  const _Questions({required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: 300.sp,
+                child: Text(
+                  title,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                  maxLines: 3,
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12.sp,
+                    ),
+                  ),
+                ),
+              ),
+              Text(
+                '+',
+                style:
+                    TextStyle(color: const Color(0xFFD434FE), fontSize: 16.sp),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 10.sp,
+          ),
+          Divider(
+            color: const Color(0xFFD434FE),
+            height: 1.h,
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+        ],
+      ).animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
+    );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon/widgets/button.dart';
 import 'custom_font.dart';
 import 'widgets.dart';
 
@@ -26,7 +25,7 @@ class CustomAppBar extends StatelessWidget {
 }
 
 class _CustomAppBarDesktop extends StatelessWidget {
-  const _CustomAppBarDesktop({super.key});
+  const _CustomAppBarDesktop();
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +80,7 @@ class _CustomAppBarDesktop extends StatelessWidget {
 
 
 class _CustomAppBarMobile extends StatefulWidget {
-  const _CustomAppBarMobile({super.key});
+  const _CustomAppBarMobile();
 
   @override
   _CustomAppBarMobileState createState() => _CustomAppBarMobileState();
@@ -104,12 +103,12 @@ class _CustomAppBarMobileState extends State<_CustomAppBarMobile> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      _isMenuOpen = !_isMenuOpen; // Toggle the menu
+                      _isMenuOpen = !_isMenuOpen; 
                     });
                   },
                   child: _isMenuOpen
-                      ? const Icon(Icons.cancel, color: Colors.white) // Cancel icon when open
-                      : const Icon(Icons.menu, color: Colors.white), // Menu icon when closed
+                      ? const Icon(Icons.cancel, color: Colors.white) 
+                      : const Icon(Icons.menu, color: Colors.white), 
                 ),
               ],
             ),
@@ -146,14 +145,12 @@ class _CustomAppBarMobileState extends State<_CustomAppBarMobile> {
 class MenuItem extends StatelessWidget {
   final String title;
 
-  const MenuItem({required this.title});
+  const MenuItem({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Handle the menu item selection here
-        print('Selected: $title');
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -170,11 +167,11 @@ class MenuItem extends StatelessWidget {
 
 
 class _AppBarButton extends StatelessWidget {
-  // const _AppBarButton({super.key});
+
   final String title;
   final Function()? onTap;
 
-  const _AppBarButton({super.key, required this.title, required this.onTap});
+  const _AppBarButton({required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

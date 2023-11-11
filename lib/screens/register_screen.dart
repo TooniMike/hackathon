@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hackathon/screens/home_screen.dart';
 import 'package:hackathon/widgets/custom_font.dart';
 import 'package:http/http.dart' as http;
 import '../services/config.dart';
@@ -76,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 // This container
                 Container(
                   height: 700,
-                  width: MediaQuery.of(context).size.width * 0.55,
+                  width: MediaQuery.of(context).size.width * 0.5,
                   decoration: BoxDecoration(
                       color: const Color(0xFFD9D9D9).withOpacity(0.05),
                       borderRadius: BorderRadius.circular(5)),
@@ -152,7 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.25,
+                                      MediaQuery.of(context).size.width * 0.2,
                                   child: TextField(
                                     style: const TextStyle(color: Colors.white),
                                     controller: teamName,
@@ -185,7 +186,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.25,
+                                      MediaQuery.of(context).size.width * 0.2,
                                   child: TextField(
                                     style: const TextStyle(color: Colors.white),
                                     controller: phoneNumber,
@@ -223,7 +224,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.25,
+                                      MediaQuery.of(context).size.width * 0.2,
                                   child: TextField(
                                     style: const TextStyle(color: Colors.white),
                                     controller: email,
@@ -256,7 +257,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.25,
+                                      MediaQuery.of(context).size.width * 0.2,
                                   child: TextField(
                                     style: const TextStyle(color: Colors.white),
                                     controller: projectTopic,
@@ -778,21 +779,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   _AppBarButton(
                     title: 'Timeline',
-                    onTap: () => debugPrint('Timeline'),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+                    }
                   ),
                   const SizedBox(
                     width: 20,
                   ),
                   _AppBarButton(
                     title: 'Overview',
-                    onTap: () => debugPrint('Overview'),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+                    }
                   ),
                   const SizedBox(
                     width: 20,
                   ),
                   _AppBarButton(
                     title: 'FAQs',
-                    onTap: () => debugPrint('FAQs'),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+                    }
                   ),
                   const SizedBox(
                     width: 20,
@@ -842,13 +849,11 @@ Future<void> fetchData() async {
     final response = await http
         .get(Uri.parse('${Config.baseUrl}/hackathon/categories-list'));
     if (response.statusCode == 200) {
-      print(response);
       setState(() {
         items = List<Map<String, dynamic>>.from(json.decode(response.body));
         isLoading = false;
       });
     }
-    print('failed');
   }
 
   Future<void> postData() async {
@@ -942,7 +947,7 @@ class _AppBarButton extends StatelessWidget {
   final String title;
   final Function()? onTap;
 
-  const _AppBarButton({super.key, required this.title, required this.onTap});
+  const _AppBarButton({required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

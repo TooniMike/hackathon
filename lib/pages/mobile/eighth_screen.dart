@@ -1,4 +1,7 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hackathon/widgets/custom_font.dart';
 
 class EightScreen extends StatelessWidget {
@@ -6,18 +9,17 @@ class EightScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children:[ 
-        Positioned(
-        bottom: 0,
-        right: 0,
+    return Stack(children: [
+      Positioned(
+        bottom: 0.sp,
+        right: 0.sp,
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF150E28).withOpacity(0.2),
                 offset: const Offset(0, 4),
-                blurRadius: 6,
+                blurRadius: 6.r,
               ),
             ],
           ),
@@ -30,17 +32,16 @@ class EightScreen extends StatelessWidget {
           ),
         ),
       ),
-
       Positioned(
-        top: 0,
-        right: 0,
+        top: 0.sp,
+        right: 0.sp,
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF150E28).withOpacity(0.2),
                 offset: const Offset(0, 4),
-                blurRadius: 6,
+                blurRadius: 6.r,
               ),
             ],
           ),
@@ -48,145 +49,98 @@ class EightScreen extends StatelessWidget {
             opacity: 0.2,
             child: Image.asset(
               'assets/images/Lens-right.png',
-              
             ),
           ),
         ),
       ),
-        Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Partners and Sponsors',
-                  style: TextStyle(
-                      fontFamily: 'ClashDisplay', fontSize: 25, color: Colors.white)),
+          AnimatedTextKit(
+            totalRepeatCount: 2,
+            animatedTexts: [
+              TyperAnimatedText(
+                'Partners and Sponsors',
+                textStyle: TextStyle(
+                  fontFamily: 'ClashDisplay',
+                  color: Colors.white,
+                  fontSize: 25.sp,
+                ),
+              ),
             ],
           ),
+          SizedBox(
+            height: 10.sp,
+          ),
           Text(
-            'Getlinked Hackathon 1.0 is honored to have the\nfollowing major companies as its partners and\nsponsors.',
+            'Getlinked Hackathon 1.0 is honored to have the following major companies as its partners and sponsors.',
             style: CustomFont.customFontWhite(14.0),
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-          ),
-          const SizedBox(height: 70),
-           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
+            maxLines: 5,
+          ).animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
+          SizedBox(height: 20.sp),
+          Padding(
+            padding: EdgeInsets.only(bottom: 60.sp),
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.5,
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery.of(context).size.width * .85,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border:
-                      Border.all(color: const Color(0xFFD434FE), width: 1.0)),
+                  borderRadius: BorderRadius.circular(5.r),
+                  border: Border.all(
+                      color: const Color(0xFFD434FE), width: 1.0.sp)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/Liberty company.png',
-                        width: 100,
-                      ),
-                      const SizedBox(
-                        height: 80,
-                        child: VerticalDivider(
-                          color: Color(0xFFD434FE),
-                          thickness: 2,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Image.asset('assets/images/Liberty.png',
-                            width: 100),
-                      ),
-                      const SizedBox(
-                        height: 80,
-                        child: VerticalDivider(
-                          color: Color(0xFFD434FE),
-                          thickness: 2,
-                        ),
-                      ),
-                      Image.asset(
-                        'assets/images/Winwise.png',
-                        width: 100,
-                      ),
-                    ],
+                  SizedBox(
+                    height: 20.sp,
                   ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  _sponsors('Liberty company', 'Liberty', 'Winwise'),
+                  SizedBox(
+                    height: 10.sp,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SizedBox(
-                        width:
-                            100, 
+                        width: 70.sp,
                         child: Divider(
-                          color: Color(0xFFD434FE),
-                          height: 1,
-                          thickness: 2,
+                          color: const Color(0xFFD434FE),
+                          height: 1.sp,
+                          thickness: 2.sp,
                         ),
                       ),
                       SizedBox(
-                        width: 50,
+                        width: 10.sp,
                       ),
                       SizedBox(
-                        width:
-                            100,
+                        width: 70.sp,
                         child: Divider(
-                          color: Color(0xFFD434FE),
-                          height: 1,
-                          thickness: 2,
+                          color: const Color(0xFFD434FE),
+                          height: 1.sp,
+                          thickness: 2.sp,
                         ),
                       ),
                       SizedBox(
-                        width: 50,
+                        width: 10.sp,
                       ),
                       SizedBox(
-                        width:
-                            90,
+                        width: 70.sp,
                         child: Divider(
-                          color: Color(0xFFD434FE),
-                          height: 1,
-                          thickness: 2,
+                          color: const Color(0xFFD434FE),
+                          height: 1.sp,
+                          thickness: 2.sp,
                         ),
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/wisper.png',
-                        width: 100,
-                      ),
-                      const SizedBox(
-                        height: 100,
-                        child: VerticalDivider(
-                          color: Color(0xFFD434FE),
-                          thickness: 2,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Image.asset('assets/images/Paybox.png',
-                            width: 100),
-                      ),
-                      const SizedBox(
-                        height: 100,
-                        child: VerticalDivider(
-                          color: Color(0xFFD434FE),
-                          thickness: 2,
-                        ),
-                      ),
-                      Image.asset(
-                        'assets/images/Vizual.png',
-                        width: 100,
-                      ),
-                    ],
+                  SizedBox(
+                    height: 10.sp,
+                  ),
+                  _sponsors('wisper', 'Paybox', 'Vizual'),
+                  SizedBox(
+                    height: 20.sp,
                   ),
                 ],
               ),
@@ -195,6 +149,42 @@ class EightScreen extends StatelessWidget {
         ],
       ),
     ]);
-  
+  }
+
+  Widget _sponsors(String image1, String image2, String image3) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          'assets/images/$image1.png',
+          width: 70.sp,
+        ).animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
+        SizedBox(
+          height: 60.sp,
+          child: VerticalDivider(
+            color: const Color(0xFFD434FE),
+            thickness: 2.sp,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(15.0.sp),
+          child: Image.asset('assets/images/$image2.png', width: 70.sp)
+              .animate()
+              .fade(duration: 2.seconds)
+              .scale(delay: 0.seconds),
+        ),
+        SizedBox(
+          height: 60.sp,
+          child: VerticalDivider(
+            color: const Color(0xFFD434FE),
+            thickness: 2.sp,
+          ),
+        ),
+        Image.asset(
+          'assets/images/$image3.png',
+          width: 70.sp,
+        ).animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
+      ],
+    );
   }
 }

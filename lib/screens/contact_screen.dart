@@ -1,10 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hackathon/screens/home_screen.dart';
 import 'package:hackathon/services/config.dart';
+import 'package:hackathon/services/white_space.dart';
 import 'package:hackathon/widgets/custom_font.dart';
 import 'package:http/http.dart' as http;
 import '../widgets/widgets.dart';
@@ -82,8 +84,8 @@ class _ContactPageState extends State<ContactPage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Registration Failed'),
-            content: Text('Error: $e'),
+            title: const Text('Error'),
+            content: const Text('Unable to confirm your request, try again later'),
             actions: <Widget>[
               TextButton(
                 child: const Text('OK'),
@@ -149,7 +151,7 @@ class _ContactPageState extends State<ContactPage> {
               children: [
                 Image.asset('assets/images/sata gra.png'),
                 Image.asset('assets/images/star2.png'),
-                const SizedBox(
+                const WhiteSpace(
                   height: 20,
                 ),
               ],
@@ -167,7 +169,7 @@ class _ContactPageState extends State<ContactPage> {
                             fontFamily: 'ClashDisplay',
                             fontSize: 26,
                             color: Color(0xFFD434FE))),
-                    const SizedBox(
+                    const WhiteSpace(
                       height: 30,
                     ),
                     Text(
@@ -178,7 +180,7 @@ class _ContactPageState extends State<ContactPage> {
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
                     ),
-                    const SizedBox(
+                    const WhiteSpace(
                       height: 20,
                     ),
                     Text(
@@ -189,7 +191,7 @@ class _ContactPageState extends State<ContactPage> {
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
                     ),
-                    const SizedBox(
+                    const WhiteSpace(
                       height: 20,
                     ),
                     Text(
@@ -200,7 +202,7 @@ class _ContactPageState extends State<ContactPage> {
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
                     ),
-                    const SizedBox(
+                    const WhiteSpace(
                       height: 20,
                     ),
                     Text(
@@ -211,7 +213,7 @@ class _ContactPageState extends State<ContactPage> {
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
                     ),
-                    const SizedBox(
+                    const WhiteSpace(
                       height: 20,
                     ),
                     Text(
@@ -222,21 +224,21 @@ class _ContactPageState extends State<ContactPage> {
                           fontWeight: FontWeight.bold,
                           fontSize: 12),
                     ),
-                    const SizedBox(
+                    const WhiteSpace(
                       height: 15,
                     ),
                     Row(
                       children: [
                         Image.asset('assets/images/instagram.png'),
-                        const SizedBox(
+                        const WhiteSpace(
                           width: 8,
                         ),
                         Image.asset('assets/images/x.png'),
-                        const SizedBox(
+                        const WhiteSpace(
                           width: 8,
                         ),
                         Image.asset('assets/images/facebook.png'),
-                        const SizedBox(
+                        const WhiteSpace(
                           width: 8,
                         ),
                         Image.asset('assets/images/linkedin.png'),
@@ -246,7 +248,7 @@ class _ContactPageState extends State<ContactPage> {
                 ),
                 Container(
                   height: 600,
-                  width: 600,
+                  width: MediaQuery.of(context).size.width * .5,
                   decoration: BoxDecoration(
                       color: const Color(0xFFD9D9D9).withOpacity(0.05),
                       borderRadius: BorderRadius.circular(5)),
@@ -266,7 +268,7 @@ class _ContactPageState extends State<ContactPage> {
                                 fontFamily: 'ClashDisplay',
                                 fontSize: 20,
                                 color: Color(0xFFD434FE))),
-                        const SizedBox(
+                        const WhiteSpace(
                           height: 30,
                         ),
                         TextField(
@@ -284,7 +286,7 @@ class _ContactPageState extends State<ContactPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(
+                        const WhiteSpace(
                           height: 30,
                         ),
                         TextField(
@@ -302,28 +304,30 @@ class _ContactPageState extends State<ContactPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(
+                        const WhiteSpace(
                           height: 30,
                         ),
                         TextField(
                           style: const TextStyle(color: Colors.white),
+                          maxLines: 3,
                           controller: message,
-                          decoration: const InputDecoration(
-                            labelText: '  Message',
-                            border: OutlineInputBorder(
+                          decoration: InputDecoration(
+                            hintText: 'Message',
+                            hintStyle: const TextStyle(color: Colors.white),
+                            alignLabelWithHint: true,
+                            border: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.white,
                               ),
                             ),
                             contentPadding:
-                                EdgeInsets.symmetric(vertical: 60.0),
-                            labelStyle: TextStyle(
+                                EdgeInsets.symmetric(vertical: 20.0.h, horizontal: 20).w,
+                            labelStyle: const TextStyle(
                               color: Colors.white,
                             ),
-                            alignLabelWithHint: true,
                           ),
                         ),
-                        const SizedBox(
+                        const WhiteSpace(
                           height: 30,
                         ),
                         Row(
@@ -334,7 +338,7 @@ class _ContactPageState extends State<ContactPage> {
                           postData();
                         },
                         child: Container(
-                            height: 50,
+                            height: 50, 
                             width: 180,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
@@ -376,7 +380,7 @@ class _ContactPageState extends State<ContactPage> {
                     fontFamily: 'ClashDisplay',
                     fontSize: 22,
                     color: Color(0xFFD434FE))),
-            const SizedBox(
+            const WhiteSpace(
               height: 20,
             ),
             Text(
@@ -385,7 +389,7 @@ class _ContactPageState extends State<ContactPage> {
               maxLines: 3,
               style: CustomFont.customFontWhite(16),
             ),
-            const SizedBox(
+            const WhiteSpace(
               height: 20,
             ),
             TextField(
@@ -403,7 +407,7 @@ class _ContactPageState extends State<ContactPage> {
                 ),
               ),
             ),
-            const SizedBox(
+            const WhiteSpace(
               height: 30,
             ),
             const TextField(
@@ -420,7 +424,7 @@ class _ContactPageState extends State<ContactPage> {
                 ),
               ),
             ),
-            const SizedBox(
+            const WhiteSpace(
               height: 30,
             ),
             TextField(
@@ -438,14 +442,14 @@ class _ContactPageState extends State<ContactPage> {
                 ),
               ),
             ),
-            const SizedBox(
+            const WhiteSpace(
               height: 30,
             ),
             TextField(
               style: const TextStyle(color: Colors.white),
               controller: message,
               decoration: const InputDecoration(
-                labelText: '  Message',
+                labelText: 'Message',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.white,
@@ -458,7 +462,7 @@ class _ContactPageState extends State<ContactPage> {
                 alignLabelWithHint: true,
               ),
             ),
-            const SizedBox(
+            const WhiteSpace(
               height: 30,
             ),
             Column(
@@ -488,7 +492,7 @@ class _ContactPageState extends State<ContactPage> {
                             ))))
                   ],
                 ),
-                const SizedBox(
+                const WhiteSpace(
                   height: 30,
                 ),
                 Text(
@@ -506,21 +510,21 @@ class _ContactPageState extends State<ContactPage> {
                       'assets/images/instagram.png',
                       width: 15,
                     ),
-                    const SizedBox(
+                    const WhiteSpace(
                       width: 8,
                     ),
                     Image.asset(
                       'assets/images/x.png',
                       width: 15,
                     ),
-                    const SizedBox(
+                    const WhiteSpace(
                       width: 8,
                     ),
                     Image.asset(
                       'assets/images/facebook.png',
                       width: 15,
                     ),
-                    const SizedBox(
+                    const WhiteSpace(
                       width: 8,
                     ),
                     Image.asset(
@@ -544,7 +548,7 @@ class _ContactPageState extends State<ContactPage> {
       elevation: 0,
       title: Column(
         children: [
-          const SizedBox(
+          const WhiteSpace(
             height: 20,
           ),
           Row(
@@ -561,23 +565,29 @@ class _ContactPageState extends State<ContactPage> {
                 children: [
                   _AppBarButton(
                     title: 'Timeline',
-                    onTap: () => debugPrint('Timeline'),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+                    }
                   ),
-                  const SizedBox(
+                  const WhiteSpace(
                     width: 20,
                   ),
                   _AppBarButton(
                     title: 'Overview',
-                    onTap: () => debugPrint('Overview'),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+                    }
                   ),
-                  const SizedBox(
+                  const WhiteSpace(
                     width: 20,
                   ),
                   _AppBarButton(
                     title: 'FAQs',
-                    onTap: () => debugPrint('FAQs'),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+                    }
                   ),
-                  const SizedBox(
+                  const WhiteSpace(
                     width: 20,
                   ),
                   TextButton(
@@ -605,7 +615,7 @@ class _ContactPageState extends State<ContactPage> {
               ),
             ],
           ),
-          const SizedBox(
+          const WhiteSpace(
             height: 20,
           ),
         ],
@@ -625,7 +635,7 @@ class _AppBarButton extends StatelessWidget {
   final String title;
   final Function()? onTap;
 
-  const _AppBarButton({super.key, required this.title, required this.onTap});
+  const _AppBarButton({required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

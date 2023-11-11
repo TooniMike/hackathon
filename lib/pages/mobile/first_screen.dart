@@ -1,215 +1,261 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hackathon/widgets/widgets.dart';
-
 import '../../widgets/custom_font.dart';
 
-class FirstScreen extends StatelessWidget {
+class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
 
   @override
+  State<FirstScreen> createState() => _FirstScreenState();
+}
+
+class _FirstScreenState extends State<FirstScreen> {
+  bool _animationCompleted = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _startAnimation();
+    });
+  }
+
+  void _startAnimation() {
+    setState(() {
+      _animationCompleted = true;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      // crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Stack(
-          children: [
-          Positioned(
-            top: -60,
-            right: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF150E28).withOpacity(0.2),
-                    offset: const Offset(0, 4),
-                    blurRadius: 6,
-                  ),
-                ],
+    return Stack(children: [
+      Positioned(
+        top: -60.sp,
+        right: 0.sp,
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF150E28).withOpacity(0.2),
+                offset: const Offset(0, 4),
+                blurRadius: 6.r,
               ),
-              child: Opacity(
-                opacity: 0.5,
-                child: Image.asset(
-                  'assets/images/flare_len01.png',
-                  height: 500,
-                  width: 500,
-                  fit: BoxFit.contain,
-                ),
-              ),
+            ],
+          ),
+          child: Opacity(
+            opacity: 0.5,
+            child: Image.asset(
+              'assets/images/flare_len01.png',
+              height: 500.sp,
+              width: 500.sp,
+              fit: BoxFit.contain,
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20, left: 0, right: 0),
-                child: Column(
+        ),
+      ),
+      Positioned(
+        top: 10.sp,
+        right: 20.sp,
+        child: AnimatedTextKit(
+          totalRepeatCount: 2,
+          animatedTexts: [
+            TyperAnimatedText(
+              'Igniting a Revolution in HR Innovation',
+              textStyle: GoogleFonts.montserrat(
+                  color: Colors.white,
+                  fontSize: 16.sp,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 50.sp, left: 0.sp, right: 0.sp),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 60,
+                ),
+                Text(
+                  'getlinked Tech',
+                  style: TextStyle(
+                      fontFamily: 'ClashDisplay',
+                      fontSize: 26.sp,
+                      color: Colors.white),
+                  textAlign: TextAlign.center,
+                )
+                    .animate()
+                    .fade(duration: 2.seconds)
+                    .scale(delay: 500.milliseconds),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Igniting a Revolution in HR Innovation',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 60,
-                    ),
-                    const Text('getlinked Tech',
-                        style: TextStyle(
+                    AnimatedTextKit(
+                      isRepeatingAnimation: false,
+                      animatedTexts: [
+                        TyperAnimatedText(
+                          'Hackathon ',
+                          curve: Curves.bounceIn,
+                          speed: const Duration(milliseconds: 700),
+                          textStyle: TextStyle(
                             fontFamily: 'ClashDisplay',
-                            fontSize: 30,
-                            color: Colors.white), textAlign: TextAlign.center,),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('Hackathon ',
-                        overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                            style: TextStyle(
-                                fontFamily: 'ClashDisplay',
-                                fontSize: 36,
-                                color: Colors.white)),
-                        const Text('1.0',
-                        overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                            style: TextStyle(
-                                fontFamily: 'ClashDisplay',
-                                fontSize: 36,
-                                color: Color(0xFFD434FE))),
-                        Image.asset(
-                          'assets/images/chain.png',
-                          width: 40,
-                          height: 40,
-                        ),
-                        Image.asset(
-                          'assets/images/light.png',
-                          width: 40,
-                          height: 40,
+                            color: Colors.white,
+                            fontSize: 30.sp,
+                          ),
                         ),
                       ],
                     ),
                     Text(
-                      'Participate in getlinked tech\nHackathon 2023 stand a\nchance to win a Big prize',
+                      '1.0',
                       overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                      style: CustomFont.customFontWhite(14.0),
-                      textAlign: TextAlign.start,
+                      maxLines: 2,
+                      style: TextStyle(
+                        fontFamily: 'ClashDisplay',
+                        fontSize: 30.sp,
+                        color: const Color(0xFFD434FE),
+                      ),
                     ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const Button(text: 'Register'),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '00',
-                          style: GoogleFonts.unicaOne(
-                              color: Colors.white, fontSize: 60),
-                        ),
-                        Text('H', style: CustomFont.customFontWhite(10)),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          '00',
-                          style: GoogleFonts.unicaOne(
-                              color: Colors.white, fontSize: 60),
-                        ),
-                        Text('M', style: CustomFont.customFontWhite(10)),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          '00',
-                          style: GoogleFonts.unicaOne(
-                              color: Colors.white, fontSize: 60),
-                        ),
-                        Text('S', style: CustomFont.customFontWhite(10)),
-                      ],
-                    ),
+                    Image.asset(
+                      'assets/images/chain.png',
+                      width: 40.sp,
+                      height: 40.sp,
+                    )
+                        .animate()
+                        .fade(duration: 2.seconds)
+                        .scale(delay: 1.seconds),
+                    Image.asset(
+                      'assets/images/light.png',
+                      width: 40.sp,
+                      height: 40.sp,
+                    )
+                        .animate()
+                        .fade(duration: 2.seconds)
+                        .scale(delay: 1.seconds),
                   ],
                 ),
-              ),
-              Image.asset(
-                'assets/images/man.png',
-                width: 350,
-                height: 350,
-                fit: BoxFit.fitWidth,
-              )
-            ],
-          ),
-          Positioned(
-            top: 450,
-            right: 30,
-            child: Image.asset(
-              'assets/images/network.png',
-              width: 400,
-              height: 400,
-              fit: BoxFit.fitWidth,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w)
+                      .copyWith(top: 15.h),
+                  child: Text(
+                    'Participate in getlinked tech Hackathon 2023 stand a chance to win a Big prize',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    style: CustomFont.customFontWhite(14.0),
+                    textAlign: TextAlign.center,
+                  ).animate()
+                                .fadeIn(duration: 2.seconds)
+                                .scale(delay: 1.seconds),
+                ),
+                SizedBox(
+                  height: 30.sp,
+                ),
+                const Button(text: 'Register')
+                    .animate()
+                    .fadeIn(duration: 3.seconds)
+                    .scale(delay: 2.seconds),
+                SizedBox(
+                  height: 20.sp,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '00',
+                      style: GoogleFonts.unicaOne(
+                          color: Colors.white, fontSize: 60.sp),
+                    ),
+                    Text('H', style: CustomFont.customFontWhite(10)),
+                    SizedBox(
+                      width: 20.sp,
+                    ),
+                    Text(
+                      '00',
+                      style: GoogleFonts.unicaOne(
+                          color: Colors.white, fontSize: 60.sp),
+                    ),
+                    Text('M', style: CustomFont.customFontWhite(10)),
+                    SizedBox(
+                      width: 20.sp,
+                    ),
+                    Text(
+                      '00',
+                      style: GoogleFonts.unicaOne(
+                          color: Colors.white, fontSize: 60.sp),
+                    ),
+                    Text('S', style: CustomFont.customFontWhite(10)),
+                  ],
+                ),
+              ],
             ),
           ),
-          Positioned(
-            top: 50,
-            right: 0,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 40),
-              child: Image.asset(
-                'assets/images/Vector 4.png',
-                width: 150,
-              ),
-            ),
+          Image.asset(
+            'assets/images/man.png',
+          ).animate().fade(duration: 2.seconds).scale(delay: 1.seconds),
+        ],
+      ),
+      AnimatedPositioned(
+        duration: const Duration(seconds: 4),
+        bottom: _animationCompleted ? 0.sp : 60.sp,
+        right: 0.sp,
+        left: 0.sp,
+        child: Image.asset(
+          'assets/images/network.png',
+          width: 400.sp,
+          height: 400.sp,
+        ).animate().fade(duration: 2.seconds).scale(delay: 1.seconds),
+      ),
+      AnimatedPositioned(
+        duration: const Duration(seconds: 4),
+        top: 30.sp,
+        right: _animationCompleted ? 30.sp : 0.sp,
+        child: Image.asset(
+          'assets/images/Vector 4.png',
+          width: 150.sp,
+        ),
+      ),
+      AnimatedPositioned(
+        duration: const Duration(seconds: 4),
+        left: _animationCompleted ? 130.sp : 30.sp,
+        top: _animationCompleted ? 50.sp : 0.sp,
+        child: Image.asset(
+          'assets/images/star.png',
+          width: 15.sp,
+          height: 15.sp,
+        ),
+      ),
+      AnimatedPositioned(
+        duration: const Duration(seconds: 4),
+        top: _animationCompleted ? 50.sp : 0.sp,
+        right: _animationCompleted ? 60.sp : 10.sp,
+        child: Padding(
+          padding: EdgeInsets.only(right: 20.sp),
+          child: Image.asset(
+            'assets/images/star2.png',
+            width: 15.sp,
+            height: 15.sp,
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 130,
-              top: 80,
-            ),
-            child: Image.asset(
-              'assets/images/star.png',
-              width: 20,
-              height: 20,
-            ),
-          ),
-          Positioned(
-            top: 70,
-            right: 60,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: Image.asset(
-                'assets/images/star2.png',
-                width: 20,
-                height: 20,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 90,
-            right: 110,
-            child: Image.asset(
-              'assets/images/Bulb.png',
-              width: 40,
-              height: 40,
-            ),
-          ),
-          
-        ]),
-      ],
-    );
+        ),
+      ),
+      AnimatedPositioned(
+        duration: const Duration(seconds: 4),
+        top: _animationCompleted ? 60.sp : 30.sp,
+        right: 90.sp,
+        child: Image.asset(
+          'assets/images/Bulb.png',
+          width: 30.sp,
+          height: 30.sp,
+        ).animate().fade(duration: 2.seconds).scale(delay: 2.seconds),
+      ),
+    ]);
   }
 }

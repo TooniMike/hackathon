@@ -1,33 +1,59 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hackathon/widgets/custom_font.dart';
 
 import '../../widgets/widgets.dart';
 
-class NinthScreen extends StatelessWidget {
+class NinthScreen extends StatefulWidget {
   const NinthScreen({super.key});
+
+  @override
+  State<NinthScreen> createState() => _NinthScreenState();
+}
+
+class _NinthScreenState extends State<NinthScreen> {
+  bool _animationCompleted = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _startAnimation();
+    });
+  }
+
+  void _startAnimation() {
+    setState(() {
+      _animationCompleted = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      Positioned(
-          top: 900,
-          right: 50,
+      AnimatedPositioned(
+          duration: const Duration(seconds: 5),
+          top: _animationCompleted ? 800.sp : 0.sp,
+          left: 0.sp,
           child: Image.asset(
             'assets/images/Vector.png',
-            width: 400,
-            height: 400,
+            width: 300.sp,
+            height: 300.sp,
           )),
       Positioned(
-        bottom: 0,
-        right: 0,
+        bottom: 0.sp,
+        right: 0.sp,
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF150E28).withOpacity(0.2),
                 offset: const Offset(0, 4),
-                blurRadius: 6,
+                blurRadius: 6.r,
               ),
             ],
           ),
@@ -41,15 +67,15 @@ class NinthScreen extends StatelessWidget {
         ),
       ),
       Positioned(
-        top: 0,
-        right: 0,
+        top: 0.sp,
+        right: 0.sp,
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF150E28).withOpacity(0.2),
                 offset: const Offset(0, 4),
-                blurRadius: 6,
+                blurRadius: 6.r,
               ),
             ],
           ),
@@ -62,129 +88,149 @@ class NinthScreen extends StatelessWidget {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(bottom: 90),
+        padding: EdgeInsets.only(bottom: 20.sp, right: 20.sp, left: 20.sp),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Privacy Policy and',
-                style: TextStyle(
+            AnimatedTextKit(
+              isRepeatingAnimation: false,
+              animatedTexts: [
+                TyperAnimatedText(
+                  'Privacy Policy and',
+                  textStyle: TextStyle(
                     fontFamily: 'ClashDisplay',
-                    fontSize: 32,
-                    color: Colors.white)),
-            const Text('Terms',
-                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 32.sp,
+                  ),
+                ),
+              ],
+            ),
+            AnimatedTextKit(
+              totalRepeatCount: 2,
+              animatedTexts: [
+                TyperAnimatedText(
+                  'Terms',
+                  textStyle: TextStyle(
                     fontFamily: 'ClashDisplay',
-                    fontSize: 32,
-                    color: Color(0xFFD434FE))),
-            Text('Last updated on September 12, 2023.',
-                style:
-                    GoogleFonts.montserrat(color: Colors.white, fontSize: 14)),
-            const SizedBox(
-              height: 20,
+                    color: const Color(0xFFD434FE),
+                    fontSize: 32.sp,
+                  ),
+                ),
+              ],
             ),
             Text(
-              'Below are our privacy & policy, which outline\na lot of goodies. it’s our aim to always take of our\nparticipant',
+              'Last updated on September 12, 2023.',
+              style:
+                  GoogleFonts.montserrat(color: Colors.white, fontSize: 12.sp),
+            ),
+            SizedBox(
+              height: 20.sp,
+            ),
+            Text(
+              'Below are our privacy & policy, which outline a lot of goodies. it’s our aim to always take of our participant',
               style: GoogleFonts.montserrat(
                   color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold),
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700),
               textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 70),
+            ).animate()
+                        .fade(duration: 2.seconds)
+                        .scale(delay: 0.seconds),
+            SizedBox(height: 30.sp),
             Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: EdgeInsets.all(5.0.sp),
               child: Container(
-                height: MediaQuery.of(context).size.height,
+                height: 550.sp,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: const Color(0xFFD9D9D9).withOpacity(0.05),
-                    border: Border.all(color: const Color(0xFFD434FE)),
-                    borderRadius: BorderRadius.circular(5)),
+                  color: const Color(0xFFD9D9D9).withOpacity(0.05),
+                  border: Border.all(color: const Color(0xFFD434FE)),
+                  borderRadius: BorderRadius.circular(5.r),
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(20.sp),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'At getlinked tech Hackathon 1.0, we value your privacy\nand are committed to protecting your personal information.\nThis Privacy Policy outlines how we collect, use, disclose,\nand safeguard your data when you participate in our tech\nhackathon event. By participating in our event, you consent\nto the practices described in this policy.',
-                        style: CustomFont.customFontWhite(16.0),
+                        'At getlinked tech Hackathon 1.0, we value your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you participate in our tech hackathon event. By participating in our event, you consent to the practices described in this policy.',
+                        style: CustomFont.customFontWhite(12.0),
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
-                          maxLines: 16,
-                      ),
-                      const SizedBox(
-                        height: 20,
+                        maxLines: 20,
+                      ).animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
+                      SizedBox(
+                        height: 20.sp,
                       ),
                       Text(
                         'Licensing Policy',
                         style: GoogleFonts.montserrat(
                             color: const Color(0xFFD434FE),
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.bold),
                         textAlign: TextAlign.start,
-                      ),
+                      ).animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
                       Text('Here are terms of our Standard License:',
                           style: GoogleFonts.montserrat(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.start),
-                      const SizedBox(
-                        height: 20,
+                          textAlign: TextAlign.start).animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
+                      SizedBox(
+                        height: 20.sp,
+                      ),
+                      _bullet(context,
+                          'The Standard License grants you a non-exclusive right to navigate and register for our event'),
+                      SizedBox(
+                        height: 20.sp,
+                      ),
+                      _bullet(context,
+                          'You are licensed to use the item available at any free source sites, for your project developement'),
+                      SizedBox(
+                        height: 30.sp,
                       ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Image.asset('assets/images/mark.png'),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                              'The Standard License grants you a\nnon-exclusive right to navigate and\nregister for our event',
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white, fontSize: 14),
-                                  textAlign: TextAlign.start,
-                                  overflow: TextOverflow.ellipsis,
-                          maxLines: 10,),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset('assets/images/mark.png'),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                              'You are licensed to use the item\navailable at any free source\nsites, for\nyour project developement',
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white, fontSize: 14))
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Button(text: 'Register'),
+                          const Button(text: 'Register').animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
                         ],
                       ),
-                      
                     ],
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 100,),
-            Image.asset('assets/images/manLock.png', width: 500, height: 500)
+            SizedBox(
+              height: 10.sp,
+            ),
+            Image.asset('assets/images/manLock.png',
+                width: 500.sp, height: 500.sp).animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
           ],
         ),
       ),
     ]);
+  }
+
+  Widget _bullet(BuildContext context, String text) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Image.asset('assets/images/mark.png').animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
+        SizedBox(
+          width: 20.sp,
+        ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * .6,
+          child: Text(text,
+              textAlign: TextAlign.start,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 20,
+              style:
+                  GoogleFonts.montserrat(color: Colors.white, fontSize: 10.sp)).animate().fade(duration: 2.seconds).scale(delay: 0.seconds),
+        )
+      ],
+    );
   }
 }

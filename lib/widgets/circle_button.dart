@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CircleButton extends StatelessWidget {
@@ -10,8 +11,8 @@ class CircleButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 10),
       child: Container(
-              width: 50,
-              height: 50, 
+              width: 50.w,
+              height: 50.h, 
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
@@ -23,7 +24,7 @@ class CircleButton extends StatelessWidget {
               child: Center(
                 child: Text(
                   text,
-                  style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)
+                  style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16.sp)
                 ),
               ),
             ),

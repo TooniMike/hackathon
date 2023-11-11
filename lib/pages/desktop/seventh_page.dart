@@ -1,8 +1,34 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hackathon/services/white_space.dart';
 
-class SeventhPage extends StatelessWidget {
+class SeventhPage extends StatefulWidget {
   const SeventhPage({super.key});
+
+  @override
+  State<SeventhPage> createState() => _SeventhPageState();
+}
+
+class _SeventhPageState extends State<SeventhPage> {
+  bool _animationCompleted = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _startAnimation();
+    });
+  }
+
+  void _startAnimation() {
+    setState(() {
+      _animationCompleted = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,34 +37,54 @@ class SeventhPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: const BoxDecoration(color: Color.fromARGB(255, 15, 11, 29)),
       child: Padding(
-        padding: const EdgeInsets.only(top: 40),
+        padding: EdgeInsets.only(top: 40.h),
         child: Stack(children: [
           Padding(
-            padding: const EdgeInsets.only(left: 90),
+            padding: EdgeInsets.only(left: 90.w),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 250),
+                      padding: EdgeInsets.only(right: 250.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Prizes and',
-                              style: TextStyle(
+                          AnimatedTextKit(
+                            isRepeatingAnimation: false,
+                            animatedTexts: [
+                              TyperAnimatedText(
+                                'Prizes and',
+                                textStyle: TextStyle(
                                   fontFamily: 'ClashDisplay',
-                                  fontSize: 32,
-                                  color: Colors.white)),
-                          const Text('Rewards',
-                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 32.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                          AnimatedTextKit(
+                            totalRepeatCount: 2,
+                            animatedTexts: [
+                              TyperAnimatedText(
+                                'Rewards',
+                                textStyle: TextStyle(
                                   fontFamily: 'ClashDisplay',
-                                  fontSize: 32,
-                                  color: Color(0xFFD434FE))),
-                          Text(
-                              'Highlight of the prizes or rewards for winners and\nfor participants.',
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white, fontSize: 14)),
+                                  color: const Color(0xFFD434FE),
+                                  fontSize: 32.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text('Highlight of the prizes or rewards for winners and for participants.',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 5,
+                                  style: GoogleFonts.montserrat(
+                                      color: Colors.white, fontSize: 12.sp))
+                              .animate()
+                              .fade(duration: 2.seconds)
+                              .scale(delay: 0.seconds),
                         ],
                       ),
                     ),
@@ -48,63 +94,76 @@ class SeventhPage extends StatelessWidget {
             ),
           ),
           Positioned(
-              top: 0, 
-              left: 0,
-              child: Image.asset('assets/images/Purple-Lens.png', )),
-              Positioned(
-              top: 0, 
-              left: 280,
-              child: Image.asset('assets/images/sata gra.png',)),
-              Positioned(
-              bottom: 0, 
-              left: 280,
+              top: 0.h,
+              left: 0.w,
+              child: Image.asset(
+                'assets/images/Purple-Lens.png',
+              )),
+          AnimatedPositioned(
+            duration: const Duration(seconds: 4),
+              top: 0.h,
+              left:_animationCompleted ? 280.w : 0.w,
+              child: Image.asset(
+                'assets/images/sata gra.png',
+              )),
+          AnimatedPositioned(
+            duration: const Duration(seconds: 4),
+              bottom: 0.h,
+              left: _animationCompleted ? 280.w : 0.w,
               child: Image.asset('assets/images/star.png')),
-              Positioned(
-              top: 200, 
-              left: 680,
+          AnimatedPositioned(
+            duration: const Duration(seconds: 4),
+              top: _animationCompleted ? 200.h : 0.h,
+              left: _animationCompleted ? 680.w : 400.w,
               child: Image.asset('assets/images/star.png')),
-              Positioned(
-              top: 120, 
-              left: 990,
+          AnimatedPositioned(
+            duration: const Duration(seconds: 4),
+              top: _animationCompleted ? 120.h : 0.h,
+              right: _animationCompleted ? 400.w : 0.w,
               child: Image.asset('assets/images/sata gra.png')),
-              Positioned(
-              top: 260, 
-              right: 220,
-              child: Image.asset('assets/images/star.png')),
-              Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFF150E28).withOpacity(0.2),
-                            offset: const Offset(0, 4),
-                            blurRadius: 6,
-                          ),
-                        ],
-                      ),
-                      child: Opacity(
-                        opacity: 0.5,
-                        child: Image.asset(
-                          'assets/images/Straight-Lens.png', 
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ),
-                  ),
           Positioned(
-              top: 180, 
-              left: 100,
-              child: Image.asset('assets/images/cup.png', width: 400, height: 400,)),
-              
-            // The Second Position
-              Positioned(
-              top: 360, 
-              left: 600,
+              top: 260.h,
+              right: 220.w,
+              child: Image.asset('assets/images/star.png')),
+          Positioned(
+            top: 0.h,
+            right: 0.w,
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF150E28).withOpacity(0.2),
+                    offset: const Offset(0, 4),
+                    blurRadius: 6.r,
+                  ),
+                ],
+              ),
+              child: Opacity(
+                opacity: 0.5,
+                child: Image.asset(
+                  'assets/images/Straight-Lens.png',
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+              top: 180.h,
+              left: 100.w,
+              child: Image.asset(
+                'assets/images/cup.png',
+                width: 400.w,
+                height: 400.h,
+              )).animate().fade(duration: 3.seconds).scale(delay: 1.seconds),
+
+          // The Second Position
+          AnimatedPositioned(
+            duration: const Duration(seconds: 4),
+              top: _animationCompleted ? 360.h : 300.h,
+              left: 600.w,
               child: Container(
-                height: 200,
-                width: 150,
+                height: 200.h,
+                width: 150.w,
                 decoration: BoxDecoration(
                   color: const Color(0xFFD434FE).withOpacity(0.2),
                   borderRadius: BorderRadius.circular(5),
@@ -112,69 +171,134 @@ class SeventhPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('2nd', style: GoogleFonts.montserrat(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
-                    Text('Runner', style: GoogleFonts.montserrat(color: Colors.white, fontSize: 16,)),
-                    Text('N300,000', style: GoogleFonts.montserrat(color: const Color(0xFFD434FE), fontSize: 20, fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 30,)
+                    Text(
+                      '2nd',
+                      style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text('Runner',
+                        style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                        )),
+                    Text('N300,000',
+                        style: GoogleFonts.montserrat(
+                            color: const Color(0xFFD434FE),
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold)),
+                    const WhiteSpace(
+                      height: 30,
+                    )
                   ],
                 ),
               )),
-              Positioned(
-              top: 280,
-              left: 600,
-              child: Image.asset('assets/images/silver_medal 1.png', width: 150, height: 150,)),
+          AnimatedPositioned(
+            duration: const Duration(seconds: 4),
+              top: _animationCompleted ? 280.h : 200.h,
+              left: 600.w,
+              child: Image.asset(
+                'assets/images/silver_medal 1.png',
+                width: 150.w,
+                height: 150.h,
+              )),
 
-              // The first Position
-              Positioned(
-              top: 370, 
-              left: 780,
+          // The first Position
+          AnimatedPositioned(
+            duration: const Duration(seconds: 4),
+              top: _animationCompleted ? 370.h : 270.h,
+              left: 780.w,
               child: Container(
-                height: 210,
-                width: 150,
+                height: 210.h,
+                width: 150.w,
                 decoration: BoxDecoration(
                   color: const Color(0xFF903AFF).withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(5.r),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('1st', style: GoogleFonts.montserrat(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
-                    Text('Runner', style: GoogleFonts.montserrat(color: Colors.white, fontSize: 16,)),
-                    Text('N400,000', style: GoogleFonts.montserrat(color: const Color(0xFF903AFF), fontSize: 20, fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 30,)
+                    Text(
+                      '1st',
+                      style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text('Runner',
+                        style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                        )),
+                    Text('N400,000',
+                        style: GoogleFonts.montserrat(
+                            color: const Color(0xFF903AFF),
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold)),
+                    const WhiteSpace(
+                      height: 30,
+                    )
                   ],
                 ),
               )),
-              Positioned(
-              top: 220,
-              left: 740,
-              child: Image.asset('assets/images/gold_medal 1.png', width: 230, height: 230,)),
+          AnimatedPositioned(
+            duration: const Duration(seconds: 4),
+              top: _animationCompleted ? 220.h : 180.h,
+              left: 740.w,
+              child: Image.asset(
+                'assets/images/gold_medal 1.png',
+                width: 230.w,
+                height: 230.h,
+              )),
 
-              // The third Position
-              Positioned(
-              top: 360,
-              left: 960,
+          // The third Position
+          AnimatedPositioned(
+            duration: const Duration(seconds: 4),
+              top: _animationCompleted ? 360.h : 300.h,
+              left: 960.w,
               child: Container(
-                height: 200,
-                width: 150,
+                height: 200.h,
+                width: 150.w,
                 decoration: BoxDecoration(
                   color: const Color(0xFFD434FE).withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(5.r),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('3rd', style: GoogleFonts.montserrat(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
-                    Text('Runner', style: GoogleFonts.montserrat(color: Colors.white, fontSize: 16,)),
-                    Text('N150,000', style: GoogleFonts.montserrat(color: const Color(0xFFD434FE), fontSize: 20, fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 30,)
+                    Text(
+                      '3rd',
+                      style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text('Runner',
+                        style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                        )),
+                    Text('N150,000',
+                        style: GoogleFonts.montserrat(
+                            color: const Color(0xFFD434FE),
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold)),
+                    const WhiteSpace(
+                      height: 30,
+                    )
                   ],
                 ),
               )),
-              Positioned(
-              top: 280,
-              left: 960,
-              child: Image.asset('assets/images/gold_medal 1.png', width: 150, height: 150,)),
+         AnimatedPositioned(
+            duration: const Duration(seconds: 4),
+              top: _animationCompleted ? 280.h : 200.h,
+              left: 960.w,
+              child: Image.asset(
+                'assets/images/gold_medal 1.png',
+                width: 150.w,
+                height: 150.h,
+              )),
         ]),
       ),
     );

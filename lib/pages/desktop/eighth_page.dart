@@ -1,4 +1,8 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hackathon/services/white_space.dart';
 import 'package:hackathon/widgets/custom_font.dart';
 
 class EighthPage extends StatelessWidget {
@@ -8,21 +12,23 @@ class EighthPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: [
       Positioned(
-          top: 200, left: 160, child: Image.asset('assets/images/star pu.png')),
+          top: 200.h,
+          left: 160.w,
+          child: Image.asset('assets/images/star pu.png')),
       Positioned(
-          top: 380,
-          left: 800,
+          top: 380.h,
+          left: 800.w,
           child: Image.asset('assets/images/sata gra.png')),
       Positioned(
-        top: 0,
-        left: 0,
+        top: 0.h,
+        left: 0.w,
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF150E28).withOpacity(0.2),
                 offset: const Offset(0, 4),
-                blurRadius: 6,
+                blurRadius: 6.r,
               ),
             ],
           ),
@@ -36,15 +42,15 @@ class EighthPage extends StatelessWidget {
         ),
       ),
       Positioned(
-        top: 0,
-        right: 0,
+        top: 0.h,
+        right: 0.w,
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF150E28).withOpacity(0.2),
                 offset: const Offset(0, 4),
-                blurRadius: 6,
+                blurRadius: 6.r,
               ),
             ],
           ),
@@ -58,9 +64,11 @@ class EighthPage extends StatelessWidget {
         ),
       ),
       Positioned(
-          top: 780, left: 800, child: Image.asset('assets/images/star.png')),
+          top: 780.h,
+          left: 800.w,
+          child: Image.asset('assets/images/star.png')),
       Padding(
-        padding: const EdgeInsets.symmetric(vertical: 90, horizontal: 50),
+        padding: EdgeInsets.symmetric(vertical: 90.w, horizontal: 50.h),
         child: Column(
           children: [
             Row(
@@ -68,30 +76,41 @@ class EighthPage extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    const Text('Partners and Sponsors',
-                        style: TextStyle(
+                    AnimatedTextKit(
+                      totalRepeatCount: 2,
+                      animatedTexts: [
+                        TyperAnimatedText(
+                          'Partners and Sponsors',
+                          textStyle: TextStyle(
                             fontFamily: 'ClashDisplay',
-                            fontSize: 32,
-                            color: Colors.white)),
+                            color: Colors.white,
+                            fontSize: 32.sp,
+                          ),
+                        ),
+                      ],
+                    ),
                     Text(
                       'Getlinked Hackathon 1.0 is honored to have the following major\ncompanies as its partners and sponsors.',
                       style: CustomFont.customFontWhite(16.0),
                       textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 70),
+                    )
+                        .animate()
+                        .fade(duration: 2.seconds)
+                        .scale(delay: 0.seconds),
+                    const WhiteSpace(height: 70),
                   ],
                 ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
+              padding: EdgeInsets.symmetric(horizontal: 50.w),
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border:
-                        Border.all(color: const Color(0xFFD434FE), width: 1.0)),
+                    borderRadius: BorderRadius.circular(5.r),
+                    border: Border.all(
+                        color: const Color(0xFFD434FE), width: 1.0.w)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -101,67 +120,74 @@ class EighthPage extends StatelessWidget {
                       children: [
                         Image.asset(
                           'assets/images/Liberty company.png',
-                          width: 200,
-                        ),
-                        const SizedBox(
-                          height: 100,
+                          width: 200.w,
+                        )
+                            .animate()
+                            .fade(duration: 2.seconds)
+                            .scale(delay: 0.seconds),
+                        SizedBox(
+                          height: 100.h,
                           child: VerticalDivider(
-                            color: Color(0xFFD434FE),
-                            thickness: 3,
+                            color: const Color(0xFFD434FE),
+                            thickness: 3.w,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(15.0),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15.w, horizontal: 15.h),
                           child: Image.asset('assets/images/Liberty.png',
-                              width: 200),
+                                  width: 200.w)
+                              .animate()
+                              .fade(duration: 2.seconds)
+                              .scale(delay: 0.seconds),
                         ),
-                        const SizedBox(
-                          height: 100,
+                        SizedBox(
+                          height: 100.h,
                           child: VerticalDivider(
-                            color: Color(0xFFD434FE),
-                            thickness: 3,
+                            color: const Color(0xFFD434FE),
+                            thickness: 3.w,
                           ),
                         ),
                         Image.asset(
                           'assets/images/Winwise.png',
-                          width: 200,
-                        ),
+                          width: 200.w,
+                        )
+                            .animate()
+                            .fade(duration: 2.seconds)
+                            .scale(delay: 0.seconds),
                       ],
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width:
-                              180, // Set the desired width to reduce the length of the divider
+                          width: 180.w,
                           child: Divider(
-                            color: Color(0xFFD434FE),
-                            height: 1,
-                            thickness: 3,
+                            color: const Color(0xFFD434FE),
+                            height: 1.h,
+                            thickness: 3.w,
                           ),
                         ),
-                        SizedBox(
+                        const WhiteSpace(
                           width: 50,
                         ),
                         SizedBox(
-                          width:
-                              180, // Set the desired width to reduce the length of the divider
+                          width: 180.w,
                           child: Divider(
-                            color: Color(0xFFD434FE),
-                            height: 1,
-                            thickness: 3,
+                            color: const Color(0xFFD434FE),
+                            height: 1.h,
+                            thickness: 3.w,
                           ),
                         ),
-                        SizedBox(
+                        const WhiteSpace(
                           width: 50,
                         ),
                         SizedBox(
-                          width:
-                              180, // Set the desired width to reduce the length of the divider
+                          width: 180.w,
                           child: Divider(
-                            color: Color(0xFFD434FE),
-                            height: 1,
-                            thickness: 3,
+                            color: const Color(0xFFD434FE),
+                            height: 1.h,
+                            thickness: 3.w,
                           ),
                         ),
                       ],
@@ -171,31 +197,41 @@ class EighthPage extends StatelessWidget {
                       children: [
                         Image.asset(
                           'assets/images/wisper.png',
-                          width: 200,
-                        ),
-                        const SizedBox(
-                          height: 100,
+                          width: 200.w,
+                        )
+                            .animate()
+                            .fade(duration: 2.seconds)
+                            .scale(delay: 0.seconds),
+                        SizedBox(
+                          height: 100.h,
                           child: VerticalDivider(
-                            color: Color(0xFFD434FE),
-                            thickness: 3,
+                            color: const Color(0xFFD434FE),
+                            thickness: 3.w,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(15.0),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 15.w, vertical: 15.h),
                           child: Image.asset('assets/images/Paybox.png',
-                              width: 200),
+                                  width: 200.w)
+                              .animate()
+                              .fade(duration: 2.seconds)
+                              .scale(delay: 0.seconds),
                         ),
-                        const SizedBox(
-                          height: 100,
+                        SizedBox(
+                          height: 100.h,
                           child: VerticalDivider(
-                            color: Color(0xFFD434FE),
-                            thickness: 3,
+                            color: const Color(0xFFD434FE),
+                            thickness: 3.w,
                           ),
                         ),
                         Image.asset(
                           'assets/images/Vizual.png',
-                          width: 200,
-                        ),
+                          width: 200.w,
+                        )
+                            .animate()
+                            .fade(duration: 2.seconds)
+                            .scale(delay: 0.seconds),
                       ],
                     ),
                   ],
